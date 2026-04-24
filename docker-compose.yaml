@@ -1,0 +1,29 @@
+services:
+  voice-bot:
+    image: cosmtrek/air
+    # working_dir value has to be the same of mapped volume
+    working_dir: /app
+    env_file:
+      - .env
+    volumes:
+      - ./:/app/
+    environment:
+      - BIND_IP=0.0.0.0
+      - ADVERTISE_IP=${DEV_IP}
+      - INTERNAL_API_BASE_URL=http://mock-server:8123/internal-api
+    ports:
+      - "5080:5080/udp"
+      - "30000-30010:30000-30010/udp"
+    depends_on:
+      - redis
+
+  mock-server:
+    image: cosmtrek/air
+    working_dir: /app
+    volumes:
+      - ./mock-server:/app
+    ports:
+      - "8123:8123"
+
+  redis:
+    image: redis:7-alpine

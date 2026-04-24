@@ -1,0 +1,16 @@
+services:
+  voice-bot:
+    image: cosmtrek/air
+    # working_dir value has to be the same of mapped volume
+    working_dir: /app
+    env_file:
+      - .env
+    volumes:
+      - ./:/app/
+    networks:
+      - comcent_comcent-network
+
+networks:
+  comcent_comcent-network:
+    external: true
+
