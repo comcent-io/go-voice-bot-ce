@@ -36,8 +36,8 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64
           push: true
+          # :latest and version tags are only moved by the Release workflow.
           tags: |
-            ghcr.io/comcent-io/go-voice-bot-ce:latest
             ghcr.io/comcent-io/go-voice-bot-ce:main
             ghcr.io/comcent-io/go-voice-bot-ce:sha-${{ env.SHORT_SHA }}
           cache-from: type=gha
